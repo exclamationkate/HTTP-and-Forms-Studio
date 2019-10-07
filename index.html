@@ -2,18 +2,148 @@
 
 <head>
 	<meta charset="utf-8">
+	<title>Fetch</title>
+	<link href="https://fonts.googleapis.com/css?family=Bowlby+One+SC&display=swap" rel="stylesheet">
 	<script>
-		// TODO: create a handler
+	// TODO: create a handler
+	function setSearchEngine() {
+		let form = document.querySelector("form");
+		let engine = document.querySelector("[name=engine]:checked");
+		let actions = {
+			"google": "https://www.google.com/search",
+			"duckDuckGo": "https://duckduckgo.com/",
+			"bing": "https://www.bing.com/search",
+			"ask": "https://www.ask.com/web"
+		};
+		form.setAttribute("action", actions[engine.value]);
+	}
+		
     window.addEventListener("load", function(){
-        // TODO: register the handler
+		let form = document.querySelector("form");
+		form.addEventListener("submit", function(event) {
+			let query = document.querySelector("input[name=q]");
+            if (query.value === "") {
+                alert("Please enter a search topic.");
+                event.preventDefault();
+            } 
+			setSearchEngine();
+		});
     });
 	</script>
 </head>
+<style>
+	body {
+		font-family: 'Open Sans', sans-serif;
+		text-align: center;
+	}
 
+	h1 {
+		font-family: 'Bowlby One SC', sans-serif;
+		font-size: 72px;
+		color: #24cfa4;
+		margin-top: 100px;
+	}
+
+	.input-field {
+		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		border: 2px solid #C2C2C2;
+		box-shadow: 1px 1px 4px #EBEBEB;
+		-moz-box-shadow: 1px 1px 4px #EBEBEB;
+		-webkit-box-shadow: 1px 1px 4px #EBEBEB;
+		border-radius: 3px;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		padding: 7px;
+		outline: none;
+		margin-bottom: 15px;
+	}
+
+	.input-field:focus {
+		border: 2px solid #24cfa4;
+	}
+
+	.form-radio {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		display: inline-block;
+		position: relative;
+		background-color: #f1f1f1;
+		color: #666;
+		top: 10px;
+		height: 30px;
+		width: 30px;
+		border: 0;
+		border-radius: 50px;
+		cursor: pointer;     
+		margin-right: 7px;
+		outline: none;
+	}
+
+	.form-radio:checked::before {
+		position: absolute;
+		font: 13px/1 'Open Sans', sans-serif;
+		left: 11px;
+		top: 7px;
+		content: '\02143';
+		transform: rotate(40deg);
+	}
+
+	.form-radio:hover {
+		background-color: #f7f7f7;
+	}
+
+	.form-radio:checked {
+		background-color: #f1f1f1;
+	}
+
+	label {
+		font: 14px/1.7 'Open Sans', sans-serif;
+		color: #333;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		cursor: pointer;
+	}
+
+	.form-button {
+		color: #494949;
+		text-transform: uppercase;
+		text-decoration: none;
+		font-size: 14px;
+		background: #f1f1f1;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		padding-left: 30px;
+		padding-right: 30px;
+		display: inline-block;
+		transition: all 0.4s ease 0s;
+		margin-top: 30px;
+	}
+
+	.form-button:hover {
+		color: #ffffff;
+		background: #24cfa4;
+		border-color: #24cfa4;
+		transition: all 0.4s ease 0s;
+	}
+
+</style>
 <body>
-
-	<form id="searchForm">
-    <!-- TODO: add form elements -->
-	</form>
+	<h1>Fetch</h1>
+	<div>
+		<form action= "" id="searchForm" method="GET">
+			<!-- TODO: add form elements -->
+			<label><input type="text" name="q" class="input-field"/></label>
+			<br>
+			<label><input type="radio" name="engine" value="google" class="form-radio" required /> Google</label>
+			<label><input type="radio" name="engine" value="duckDuckGo" class="form-radio" /> DuckDuckGo</label>
+			<label><input type="radio" name="engine" value="bing" class="form-radio" /> Bing</label>
+			<label><input type="radio" name="engine" value="ask" class="form-radio" /> Ask</label>
+			<br>
+			<button id="go" class="form-button">Go!</button>
+		</form>
+	</div>
 
 </body>
